@@ -13,17 +13,19 @@ spec:
   destinations:
     - namespace: istio-lab
       server: https://kubernetes.default.svc
+    - namespace: istio-ingress   # 允许 ArgoCD 管理 istio-ingress 命名空间
+      server: https://kubernetes.default.svc
 
-  # 关键修改：必须将源仓库改为你存放 K8s 清单的 CD 仓库
+  # 源码仓库地址
   sourceRepos:
     - 'https://github.com/pengchao2022/eks-istio-microservice-cd.git'
 
-  # 允许该项目管理集群级的 Namespace 资源（因为 Namespace 是集群级别的）
+  # 允许该项目管理集群级的 Namespace 资源
   clusterResourceWhitelist:
     - group: ''
       kind: Namespace
 
-  # 允许部署到 istio-lab 命名空间内部的应用资源
+  # 允许部署到指定命名空间内部的应用资源白名单
   namespaceResourceWhitelist:
     - group: 'apps'
       kind: Deployment

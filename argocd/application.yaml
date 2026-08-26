@@ -6,16 +6,16 @@ metadata:
 spec:
   project: istio-microservice
   source:
-    # 仓库地址 CD 仓库
     repoURL: 'https://github.com/pengchao2022/eks-istio-microservice-cd.git'
     targetRevision: HEAD
     path: manifests
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: istio-lab
+    namespace: istio-lab   # 默认命名空间（manifests 里没写 namespace 的资源会部署到这里，例如 istio-lab 的业务服务）
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true   
