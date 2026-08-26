@@ -2,10 +2,10 @@ apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
   name: lab-gateway
-  namespace: istio-lab
+  namespace: istio-system  
 spec:
   selector:
-    istio: ingressgateway
+    istio: ingressgateway  
   servers:
   - port:
       number: 80
@@ -18,7 +18,7 @@ apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: lab-vs
-  namespace: istio-lab
+  namespace: istio-system  
 spec:
   hosts:
   - "*"
@@ -30,6 +30,8 @@ spec:
         prefix: /
     route:
     - destination:
-        host: frontend-service
+        # frontend-service 实际建在 istio-lab 命名空间里
+        # 这里跨命名空间调用需要写成全称：frontend-service.istio-lab.svc.cluster.local
+        host: frontend-service.istio-lab.svc.cluster.local
         port:
           number: 8080
