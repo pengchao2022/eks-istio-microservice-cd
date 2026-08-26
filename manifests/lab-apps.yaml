@@ -20,7 +20,7 @@ spec:
         image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/backend-istio:2.0.0
         env:
         - name: VERSION
-          value: "v1"
+          value: v1
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -48,10 +48,10 @@ spec:
     spec:
       containers:
       - name: backend
-        image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/backend-istio:2.0.0
+        image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/backend-istio:2.0.3
         env:
         - name: VERSION
-          value: "v2"
+          value: v2
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -89,10 +89,10 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/frontend-istio:2.0.0
+        image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/frontend-istio:2.0.3
         env:
         - name: BACKEND_URL
-          value: "http://backend-service:8080"
+          value: http://backend-service:8080
         ports:
         - containerPort: 8080
 ---
