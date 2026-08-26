@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: eks-istio-microservice-app
+  namespace: argocd
+spec:
+  project: istio-microservice
+  source:
+    # 仓库地址 CD 仓库
+    repoURL: 'https://github.com/pengchao2022/eks-istio-microservice-cd.git'
+    targetRevision: HEAD
+    path: manifests
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: istio-lab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
