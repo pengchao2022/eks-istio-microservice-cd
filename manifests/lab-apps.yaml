@@ -89,7 +89,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/frontend-istio:latest
+        image: 317429619308.dkr.ecr.us-east-1.amazonaws.com/frontend-istio:0.0.7
         env:
         - name: BACKEND_URL
           value: "http://backend-service:8080"
