@@ -26,8 +26,8 @@ spec:
     - destination:
         host: backend-service
         subset: v1
-      weight: 100
+      weight: 80
     - destination:
         host: backend-service
         subset: v2
-      weight: 0
+      weight: 20
