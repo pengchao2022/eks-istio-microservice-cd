@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: istio-microservice
+  namespace: argocd
+  labels:
+    environment: dev
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: "Microservices project with Istio mesh for dev environment"
+  
+  destinations:
+    - namespace: istio-lab
+      server: https://kubernetes.default.svc
+
+  # 关键修改：必须将源仓库改为你存放 K8s 清单的 CD 仓库
+  sourceRepos:
+    - 'https://github.com/pengchao2022/eks-istio-microservice-cd.git'
+
+  # 允许该项目管理集群级的 Namespace 资源（因为 Namespace 是集群级别的）
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+
+  # 允许部署到 istio-lab 命名空间内部的应用资源
+  namespaceResourceWhitelist:
+    - group: 'apps'
+      kind: Deployment
+    - group: 'apps'
+      kind: StatefulSet
+    - group: ''
+      kind: Service
+    - group: ''
+      kind: ConfigMap
+    - group: ''
+      kind: Secret
+    - group: 'networking.k8s.io'
+      kind: Ingress
+    - group: 'networking.istio.io'
+      kind: '*'

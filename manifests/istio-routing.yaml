@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: backend-destination
+  namespace: istio-lab
+spec:
+  host: backend-service
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: backend-vs
+  namespace: istio-lab
+spec:
+  hosts:
+  - backend-service
+  http:
+  - route:
+    - destination:
+        host: backend-service
+        subset: v1
+      weight: 100
+    - destination:
+        host: backend-service
+        subset: v2
+      weight: 0
