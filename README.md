@@ -1,5 +1,5 @@
 # eks-istio-microservice-cd
-In this demo, I will show you how to use istio for the service mesh
+In this demo, I will show you how to use istio for the service mesh, I will install istio on EKS and also use the AWS ALB with target-type IP and created routing and virtual services. For the backend service will be two versions with canary release integrated for test.
 
 
 ## Network traffic North and South
