@@ -2,6 +2,11 @@
 In this demo, I will show you how to use istio for the service mesh
 
 
+## Network traffic North and South
+
+![north-south-traffic](./north-south-traffic.png)
+
+
 ## Microservices work with sidecar Istio
 
 ![istio-service-mesh](./istio-service-mesh.png)
